@@ -1,1 +1,17 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Seeing</title>
+<script>
+fetch("https://raw.githubusercontent.com/gundaIf/seeing/8b4d7ea369a751b663dab144f7959d024bd326b9/index.html")
+.then(function(r){return r.text()})
+.then(function(html){
+  html=html.replace(
+    "function prettyTitle(t){if(!t)return\"\";if(FILEISH.test(t)||/\\.(jpe?g|png|gif|webp|heic)$/i.test(t))return\"\";return t.trim()}",
+    "function prettyTitle(t){if(!t)return\"\";t=String(t).trim();var stem=t.replace(/\\.(jpe?g|png|gif|webp|heic|dng|tif{1,2})$/i,\"\");if(!stem||FILEISH.test(stem)||GUIDISH.test(stem)||HASHISH.test(stem.replace(/[-_]/g,\"\")))return\"\";if(/^[0-9A-F-]{20,}$/i.test(stem))return\"\";return stem;}"
+  ).replace(
+    "const SLUG=\"images-vl2czognwuq\";const PER=30;const FILEISH=/^(R\\d+|DSC|IMG[_-]?|P\\d+|DSCN|LUC|_MG_)/i;",
+    "const SLUG=\"images-vl2czognwuq\";const PER=30;const FILEISH=/^(R\\d+|DSC|IMG[_-]?|P\\d+|DSCN|LUC|_MG_|LCS_|CS\\d)/i;const GUIDISH=/^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i;const HASHISH=/^[0-9A-F]{16,}$/i;"
+  );
+  document.open();document.write(html);document.close();
+});
+</script>
